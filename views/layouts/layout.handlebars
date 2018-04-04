@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>FSE Chat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootsrapcdn.com/bootsratp/3.3.6/css/bootstrap.min.css"/>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+		<link rel="stylesheet" href="/css/style.css"/>
+
+    <style>
+      #messages{height:300px;}
+    </style>
+
+	</head>
+	<body>
+		<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            
+            {{#if user}}
+            <li class="nav-item">
+              <a class="nav-link active" href="/">DashBoard <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/logout">Logout</a>
+            </li>
+            
+            {{else}}
+            <li class="nav-item">
+              <a class="nav-link" href="/users/login">Login</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="/users/register">Register</a>
+            </li>
+            {{/if}}
+ 
+          </ul>
+        </nav>
+        <h3 class="text-muted">FSE Chat App </h3>
+        {{#if user}}
+          <h4>Welcome: <b><i id="username">{{{username}}} </i></b> </h4>
+        {{/if}}
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12" >
+          
+          {{#if success_msg}}
+            <div class="alert alert-success">  
+            {{success_msg}}
+            </div>
+          {{/if}}
+
+          {{#if error_msg}}
+            <div class="alert alert-danger">  
+            {{error_msg}}
+            </div>
+          {{/if}}
+
+          {{#if error}}
+            <div class="alert alert-danger">  
+            {{error}}
+            </div>
+          {{/if}}
+
+          {{{body}}}
+
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; FSE Chat Application 2018</p>
+      </footer>
+
+    </div> <!-- /container -->
+		
+	</body>
+</html>

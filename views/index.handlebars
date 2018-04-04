@@ -1,0 +1,107 @@
+<div class="jumbotron left ">
+	
+	<div id="status"></div>
+	<div id="pull-right">
+		<h4> Messages </h4>
+		<br/>
+		<div class="card" style="background: #ffffff">
+			<div id="messages" class="card-block" style="overflow-y: true; max-height: 200px">
+
+			</div>
+		</div>
+		<br/>
+		<textarea id="textarea" class="form-control" placeholder="Enter message" style="resize: none;"></textarea> 
+		<br/>
+		<div>
+			<button id="post_btn" class="btn btn-success" style="width: 200px">Post</button>
+		</div>
+		<br/>
+		<button id="clear" class="btn btn-primary" style="width: 200px">Clear All Posts</button>
+			
+		</div>
+		
+		
+</div>
+		
+	
+<script> 
+
+  	(function(){
+    var element = function(id){
+      return document.getElementById(id);
+    }
+
+    //get elements
+    var status = element('status');
+    var message = element('messages');
+    var textarea = element('textarea');
+    var username = element('username');//username.textContent;
+    var clearBtn = element('clear');
+    var postBtn = element('post_btn');
+    var statusDefault = status.textContent;
+    //username.value.textContent = 
+
+    var setStatus = function(s){
+      //set status
+      status.textContent = s;
+      if(s !== statusDefault){
+        var delay = setTimeout(function(){
+          setStatus(statusDefault);
+        }, 4000);
+      }
+    }
+   var socket = io.connect('http://localhost:3000');
+   message.textContent = '';
+   socket.emit('load');
+
+   //handle Output
+   socket.on('output', function(data) {
+      
+      if(data.length){
+  	     for(var x = 0; x < data.length; x++){
+  	       //Build out message div
+  	       var messages = document.createElement('div');
+  	       messages.setAttribute('class', 'chat-message');
+  	       messages.textContent = data[x].username +"(@"+data[x].time +")"+": "+data[x].message;
+  	       message.appendChild(messages);
+  	       //message.insertAfter(messages, message.lastChild);
+  	     }
+   		}
+   });
+  
+
+   socket.on('status', function(data) {
+
+      //get message status
+      setStatus((typeof data === 'object') ? data.message : data);
+
+      //if status is clear, clear text
+      if(data.clear){
+        textarea.value = '';
+      }
+
+      });
+
+   postBtn.addEventListener('click', function(){
+      //emit to server input
+      var dt = new Date();
+		  var utcDate = dt.toUTCString();
+            socket.emit('input', {
+              username: username.textContent,
+              message: textarea.value,
+              time: utcDate
+            });
+            event.preventDefault();
+      });
+
+      //handle chat clear
+      clearBtn.addEventListener('click', function(){
+           socket.emit('clear');
+      });
+      //emit cleared
+      socket.on('cleared', function(){
+        message.textContent = '';
+      })
+      
+   })();
+</script>

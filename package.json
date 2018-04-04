@@ -1,0 +1,36 @@
+{
+  "name": "fsechat",
+  "version": "1.0.0",
+  "description": "FSE chat application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SteadyBits/fsechat.git"
+  },
+  "author": "Daniel Omeiza",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
+    "express": "*",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+    "socket.io": "^2.0.4"
+  },
+  "bugs": {
+    "url": "https://github.com/SteadyBits/fsechat/issues"
+  },
+  "homepage": "https://github.com/SteadyBits/fsechat#readme"
+}
