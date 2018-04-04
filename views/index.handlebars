@@ -1,5 +1,5 @@
 <div class="jumbotron left ">
-	
+
 	<div id="status"></div>
 	<div id="pull-right">
 		<h4> Messages </h4>
@@ -10,21 +10,17 @@
 			</div>
 		</div>
 		<br/>
-		<textarea id="textarea" class="form-control" placeholder="Enter message" style="resize: none;"></textarea> 
+		<textarea id="textarea" class="form-control" placeholder="Enter message" style="resize: none;"></textarea>
 		<br/>
 		<div>
 			<button id="post_btn" class="btn btn-success" style="width: 200px">Post</button>
 		</div>
 		<br/>
 		<button id="clear" class="btn btn-primary" style="width: 200px">Clear All Posts</button>
-			
+
 		</div>
-		
-		
 </div>
-		
-	
-<script> 
+<script>
 
   	(function(){
     var element = function(id){
@@ -39,7 +35,7 @@
     var clearBtn = element('clear');
     var postBtn = element('post_btn');
     var statusDefault = status.textContent;
-    //username.value.textContent = 
+    //username.value.textContent =
 
     var setStatus = function(s){
       //set status
@@ -56,7 +52,7 @@
 
    //handle Output
    socket.on('output', function(data) {
-      
+
       if(data.length){
   	     for(var x = 0; x < data.length; x++){
   	       //Build out message div
@@ -68,7 +64,7 @@
   	     }
    		}
    });
-  
+
 
    socket.on('status', function(data) {
 
@@ -102,6 +98,6 @@
       socket.on('cleared', function(){
         message.textContent = '';
       })
-      
+
    })();
 </script>

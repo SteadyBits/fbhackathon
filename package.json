@@ -17,6 +17,8 @@
     "body-parser": "*",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
+    "emojibase-data": "^2.2.0",
+    "emojibase-regex": "^1.0.9",
     "express": "*",
     "express-handlebars": "*",
     "express-messages": "*",

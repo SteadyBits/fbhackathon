@@ -10,7 +10,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fsechat', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/fsechat');
 var socket = require('socket.io');
 
 var routes = require('./routes/index');
@@ -20,6 +20,12 @@ var users = require('./routes/users');
 
 //Init App
 var app = express();
+
+//Fetching list of emojis
+data = require('emojibase-data/en/compact.json');
+console.log(data)
+
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '/public')));
